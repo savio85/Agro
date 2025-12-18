@@ -7,6 +7,7 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pesquisa.css">
     <link rel="stylesheet" href="style.css">
     <title>AgroTech</title>
 </head>
@@ -51,11 +52,13 @@
 
     <div class="background"></div>
     <main class="conteudo">
-        <h1>Conteudo Principal</h1>
-        <p>Aqui ficará a parte de pesquisa de clientes já cadastrados</p>
+       <h1>Pesquisa de Clientes Cadastrados</h1>
+    <input type="text" id="search" placeholder="Digite o nome, email ou cidade do cliente..." onkeyup="searchClients()">
+    <ul id="results"></ul>
     </main>
 
 
 </body>
+<script src="./pesquisa.js"></script>
 <script src="./navbar.js"></script>
 </html>
