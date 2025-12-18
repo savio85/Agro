@@ -1,11 +1,20 @@
-document.getElementById('cadastroForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+ // Carregar clientes do localStorage
+        function loadClients() {
+            return JSON.parse(localStorage.getItem('clients')) || [];
+        }
 
-            // Limpar mensagens de erro anteriores
+        // Salvar clientes no localStorage
+        function saveClients(clients) {
+            localStorage.setItem('clients', JSON.stringify(clients));
+        }
+
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Limpar mensagens de erro
             const errors = document.querySelectorAll('.error');
             errors.forEach(error => error.style.display = 'none');
 
-            // Obter valores dos campos
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const telefone = document.getElementById('telefone').value.trim();
@@ -13,7 +22,6 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
 
             let hasError = false;
 
-            // Verificar cada campo
             if (!nome) {
                 document.getElementById('nomeError').style.display = 'block';
                 hasError = true;
@@ -32,10 +40,11 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
             }
 
             if (!hasError) {
-                // Simulação de envio (pode ser substituído por uma requisição AJAX)
-                alert('Cadastro realizado com sucesso!\nNome: ' + nome + '\nEmail: ' + email + '\nTelefone: ' + telefone + '\nEndereço: ' + endereco);
+                const clients = loadClients();
+                clients.push({ nome, email, telefone, endereco });
+                saveClients(clients);
 
-                // Limpar formulário
+                alert('Cadastro realizado com sucesso!');
                 document.getElementById('cadastroForm').reset();
             }
         });

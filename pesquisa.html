@@ -52,13 +52,21 @@
 
     <div class="background"></div>
     <main class="conteudo">
-       <h1>Pesquisa de Clientes Cadastrados</h1>
-    <input type="text" id="search" placeholder="Digite o nome, email ou cidade do cliente..." onkeyup="searchClients()">
-    <ul id="results"></ul>
+       <div class="container">
+        <h2>Pesquisa de Clientes</h2>
+        <div class="search-section">
+            <label for="search">Buscar por Nome ou Email:</label>
+            <input type="text" id="search" name="search" placeholder="Digite o nome ou email">
+            <button onclick="searchClients()"  class="butao-pesquisa">Buscar</button>
+        </div>
+        <div class="results" id="results">
+            <!-- Resultados da pesquisa aparecerão aqui -->
+        </div>
+    </div>
     </main>
 
 
 </body>
-<script src="./pesquisa.js"></script>
-<script src="./navbar.js"></script>
+<script src="scripts/pesquisa.js"></script>
+<script src="scripts/navbar.js"></script>
 </html>
