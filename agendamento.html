@@ -7,7 +7,8 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/agenda.css">
     <title>AgroTech</title>
 </head>
 
@@ -51,11 +52,41 @@
 
     <div class="background"></div>
     <main class="conteudo">
-        <h1>Conteudo Principal</h1>
-        <p>Aqui será a aba  de agendamento de visitas</p>
+        <div class="container">
+        <h2>Agendamento de Visitas</h2>
+        
+        <div class="agenda-section">
+            <h3>Agendar Visita</h3>
+            <form id="agendamentoForm">
+                <label for="cliente">Nome do Cliente:</label>
+                <select id="cliente" name="cliente" required>
+                    <option value="">Selecione um cliente</option>
+                </select>
+                <div class="error" id="clienteError">Por gentileza, selecionar um cliente.</div>
+
+                <label for="data">Data do Agendamento:</label>
+                <input type="date" id="data" name="data" required>
+                <div class="error" id="dataError">Por gentileza, selecionar uma data.</div>
+
+                <label for="hora">Hora da Visita:</label>
+                <input type="time" id="hora" name="hora" required>
+                <div class="error" id="horaError">Por gentileza, selecionar uma hora.</div>
+
+                <button type="submit">Agendar</button>
+            </form>
+        </div>
+
+        <div class="agendamentos-list">
+            <h3>Agendamentos Realizados</h3>
+            <div id="agendamentos">
+                <!-- Agendamentos aparecerão aqui -->
+            </div>
+        </div>
+    </div>
     </main>
 
 
 </body>
-<script src="./navbar.js"></script>
+<script src="scripts/navbar.js"></script>
+<script src="scripts/agenda.js"></script>
 </html>
