@@ -1,4 +1,4 @@
- body {
+body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -16,23 +16,26 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .agenda-section {
-            margin-bottom: 30px;
-        }
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
-        select, input[type="date"], input[type="time"] {
+        input[type="datetime-local"], select {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
         }
-        .butao-agenda {
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        button {
             padding: 10px 15px;
             background-color: #4CAF50;
             color: white;
@@ -40,27 +43,23 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            margin-right: 10px;
         }
-        .butao-agenda:hover {
+        button:hover {
             background-color: #45a049;
         }
-        .agendamentos-list {
+        .results {
             margin-top: 20px;
         }
-        .agendamento-item {
+        .appointment-item {
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 4px;
         }
-        .agendamento-item h3 {
+        .appointment-item h3 {
             margin: 0 0 5px 0;
         }
-        .agendamento-item p {
+        .appointment-item p {
             margin: 2px 0;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
         }

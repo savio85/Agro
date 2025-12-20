@@ -53,36 +53,25 @@
     <div class="background"></div>
     <main class="conteudo">
         <div class="container">
-        <h2>Agendamento de Visitas</h2>
-        
-        <div class="agenda-section">
-            <h3>Agendar Visita</h3>
-            <form id="agendamentoForm">
-                <label for="cliente">Nome do Cliente:</label>
-                <select id="cliente" name="cliente" required>
-                    <option value="">Selecione um cliente</option>
-                </select>
-                <div class="error" id="clienteError">Por gentileza, selecionar um cliente.</div>
+        <h2>Agendamento de Visita</h2>
+        <form id="agendaForm">
+            <label for="cliente">Selecionar Cliente:</label>
+            <select id="cliente" name="cliente">
+                <option value="">Escolha um cliente</option>
+            </select>
+            <div class="error" id="clienteError">Por gentileza, selecionar um cliente.</div>
 
-                <label for="data">Data do Agendamento:</label>
-                <input type="date" id="data" name="data" required>
-                <div class="error" id="dataError">Por gentileza, selecionar uma data.</div>
+            <label for="datahora">Data e Hora da Visita:</label>
+            <input type="datetime-local" id="datahora" name="datahora">
+            <div class="error" id="datahoraError">Por gentileza, selecionar data e hora.</div>
 
-                <label for="hora">Hora da Visita:</label>
-                <input type="time" id="hora" name="hora" required>
-                <div class="error" id="horaError">Por gentileza, selecionar uma hora.</div>
-
-                <button type="submit">Agendar</button>
-            </form>
-        </div>
-
-        <div class="agendamentos-list">
-            <h3>Agendamentos Realizados</h3>
-            <div id="agendamentos">
-                <!-- Agendamentos aparecerão aqui -->
-            </div>
+            <button type="submit">Agendar</button>
+        </form>
+        <div class="results" id="appointments">
+            <!-- Agendamentos aparecerão aqui -->
         </div>
     </div>
+
     </main>
 
 

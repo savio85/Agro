@@ -1,108 +1,122 @@
+ // Carregar clientes do localStorage
         function loadClients() {
             return JSON.parse(localStorage.getItem('clients')) || [];
         }
 
         // Carregar agendamentos do localStorage
-        function loadAgendamentos() {
-            return JSON.parse(localStorage.getItem('agendamentos')) || [];
+        function loadAppointments() {
+            return JSON.parse(localStorage.getItem('appointments')) || [];
         }
 
         // Salvar agendamentos no localStorage
-        function saveAgendamentos(agendamentos) {
-            localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+        function saveAppointments(appointments) {
+            localStorage.setItem('appointments', JSON.stringify(appointments));
         }
 
-        // Preencher o select com clientes cadastrados
-        function populateClientes() {
+        // Carregar clientes no dropdown da agenda
+        function loadClientsForAgenda() {
             const clients = loadClients();
             const select = document.getElementById('cliente');
-            select.innerHTML = '<option value="">Selecione um cliente</option>';
-            clients.forEach(client => {
+            select.innerHTML = '<option value="">Escolha um cliente</option>';
+            if (clients.length === 0) {
+                select.innerHTML += '<option value="" disabled>Nenhum cliente cadastrado</option>';
+                return;
+            }
+            clients.forEach((client, index) => {
                 const option = document.createElement('option');
-                option.value = client.email; // Usar email como identificador único
+                option.value = index;
                 option.textContent = client.nome;
                 select.appendChild(option);
             });
         }
 
         // Exibir agendamentos
-        function displayAgendamentos() {
-            const agendamentos = loadAgendamentos();
-            const clients = loadClients();
-            const container = document.getElementById('agendamentos');
-            container.innerHTML = '';
+        function displayAppointments() {
+            const appointments = loadAppointments();
+            const appointmentsDiv = document.getElementById('appointments');
+            appointmentsDiv.innerHTML = '';
 
-            if (agendamentos.length === 0) {
-                container.innerHTML = '<p>Nenhum agendamento realizado.</p>';
+            if (appointments.length === 0) {
+                appointmentsDiv.innerHTML = '<p>Nenhum agendamento encontrado.</p>';
                 return;
             }
 
-            agendamentos.forEach(agendamento => {
-                const client = clients.find(c => c.email === agendamento.clienteEmail);
-                if (client) {
-                    const item = document.createElement('div');
-                    item.className = 'agendamento-item';
-                    item.innerHTML = `
-                        <h3>${client.nome}</h3>
-                        <p><strong>Email:</strong> ${client.email}</p>
-                        <p><strong>Telefone:</strong> ${client.telefone}</p>
-                        <p><strong>Endereço:</strong> ${client.endereco}</p>
-                        <p><strong>Data:</strong> ${agendamento.data}</p>
-                        <p><strong>Hora:</strong> ${agendamento.hora}</p>
-                    `;
-                    container.appendChild(item);
-                }
+            appointments.forEach((appt, index) => {
+                const apptDiv = document.createElement('div');
+                apptDiv.className = 'appointment-item';
+                apptDiv.innerHTML = `
+                    <h3>${appt.clienteNome}</h3>
+                    <p><strong>Data/Hora:</strong> ${new Date(appt.datahora).toLocaleString('pt-BR')}</p>
+                    <p><strong>Telefone:</strong> ${appt.telefone}</p>
+                    <button onclick="sendWhatsApp(${index})">Enviar Confirmação por WhatsApp</button>
+                `;
+                appointmentsDiv.appendChild(apptDiv);
             });
         }
 
-        // Evento de submissão do formulário
-        document.getElementById('agendamentoForm').addEventListener('submit', function(event) {
+        // Evento de submissão do formulário de agenda
+        document.getElementById('agendaForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
             // Limpar mensagens de erro
-            const errors = document.querySelectorAll('.error');
-            errors.forEach(error => error.style.display = 'none');
+            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
 
-            const clienteEmail = document.getElementById('cliente').value;
-            const data = document.getElementById('data').value;
-            const hora = document.getElementById('hora').value;
+            const clienteIndex = document.getElementById('cliente').value;
+            const datahora = document.getElementById('datahora').value;
 
             let hasError = false;
 
-            if (!clienteEmail) {
+            if (!clienteIndex) {
                 document.getElementById('clienteError').style.display = 'block';
                 hasError = true;
             }
-            if (!data) {
-                document.getElementById('dataError').style.display = 'block';
-                hasError = true;
-            }
-            if (!hora) {
-                document.getElementById('horaError').style.display = 'block';
+            if (!datahora) {
+                document.getElementById('datahoraError').style.display = 'block';
                 hasError = true;
             }
 
             if (!hasError) {
-                const agendamentos = loadAgendamentos();
-                agendamentos.push({ clienteEmail, data, hora });
-                saveAgendamentos(agendamentos);
+                const clients = loadClients();
+                if (clients.length === 0 || !clients[clienteIndex]) {
+                    alert('Erro: Cliente não encontrado.');
+                    return;
+                }
+                const client = clients[clienteIndex];
+                const appointments = loadAppointments();
+                appointments.push({
+                    clienteNome: client.nome,
+                    telefone: client.telefone,
+                    datahora: datahora
+                });
+                saveAppointments(appointments);
 
                 alert('Agendamento realizado com sucesso!');
-                document.getElementById('agendamentoForm').reset();
-                displayAgendamentos(); // Atualizar lista
+                document.getElementById('agendaForm').reset();
+                displayAppointments();
             }
         });
 
-        // Inicializar página
-        populateClientes();
-        displayAgendamentos();
-
-        const formFields = ['cliente', 'data', 'hora'];
-formFields.forEach(fieldId => {
-    document.getElementById(fieldId).addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Impede comportamento padrão
-            document.getElementById('agendamentoForm').dispatchEvent(new Event('submit')); // Simula submissão
+        // Função para enviar confirmação por WhatsApp
+        function sendWhatsApp(index) {
+            const appointments = loadAppointments();
+            if (!appointments[index]) {
+                alert('Erro: Agendamento não encontrado.');
+                return;
+            }
+            const appt = appointments[index];
+            const dataHoraFormatada = new Date(appt.datahora).toLocaleString('pt-BR');
+            const mensagem = `Agendamento de visita concluído. Data e hora: ${dataHoraFormatada}`;
+            const numero = appt.telefone.replace(/\D/g, ''); // Remove caracteres não numéricos
+            if (numero.length < 10) {
+                alert('Erro: Número de telefone inválido.');
+                return;
+            }
+            const url = `https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
         }
-    });
-});
+
+        // Inicializar ao carregar a página
+        window.onload = function() {
+            loadClientsForAgenda();
+            displayAppointments();
+        };
