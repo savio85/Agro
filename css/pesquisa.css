@@ -1,58 +1,135 @@
-body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .butao-pesquisa {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .butaopesquisa:hover {
-            background-color: #45a049;
-        }
-        .results {
-            margin-top: 20px;
-        }
-        .client-item {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-        .client-item h3 {
-            margin: 0 0 5px 0;
-        }
-        .client-item p {
-            margin: 2px 0;
-        }
+/* Estilos para a página de pesquisa */
+.container {
+    max-width: 800px;
+    margin: 0 auto; /* Centraliza o container */
+    text-align: center; /* Centraliza o texto e elementos internos */
+}
+
+.pesquisa-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;
+    gap: 10px; /* Espaço entre input e botão */
+    margin-bottom: 20px;
+}
+
+#pesquisa {
+    width: 300px; /* Diminuído para um tamanho menor */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#botaoPesquisar {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--primary-color, #4B8B3B); /* Usa variável do CSS principal se definida */
+    color: var(--text-color, #ecf0f1);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#botaoPesquisar:hover {
+    background-color: var(--secundary-color, #7DBF6C);
+}
+
+#listaClientes {
+    margin-top: 20px;
+    text-align: left; /* Alinha a lista à esquerda para melhor leitura */
+}
+
+.cliente-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cliente-item:hover {
+    background-color: #e9e9e9;
+}
+
+.cliente-nome {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cliente-detalhes {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.cliente-detalhes.show {
+    display: block;
+}
+
+/* Ajuste na lista para ficar dentro da seção */
+#listaClientes {
+    margin-top: 10px;
+}
+
+.botao-excluir {
+    background-color: var(--secundary-color); 
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px; /* Espaço ao lado do nome */
+    transition: background-color 0.3s;
+}
+
+.botao-excluir:hover {
+    background-color: #d32f2f; /* Vermelho mais escuro no hover */
+}
+
+.clientes-cadastrados {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.clientes-cadastrados h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color, #4B8B3B);
+    font-size: 1.2em;
+}
+
+/* Novo: Estilos para paginação */
+.paginacao-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.paginacao-container button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: var(--primary-color, #4B8B3B);
+    color: var(--text-color, #ecf0f1);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.paginacao-container button:hover,
+.paginacao-container button.active {
+    background-color: var(--secundary-color, #7DBF6C);
+}
+
+.paginacao-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

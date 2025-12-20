@@ -8,6 +8,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
     <title>AgroTech</title>
 </head>
 
@@ -52,10 +53,24 @@
     <div class="background"></div>
     <main class="conteudo">
         <h1>Conteudo Principal</h1>
-        <p>Aqui  terá o conteudo e imagens sobre a "empresa"</p>
+        <div class="carousel">
+  <div class="carousel-inner">
+    <img src="imagens/imagem1.jpg" alt="Foto 1" class="active">
+    <img src="imagens/imagem2.jpg" alt="Foto 2">
+    <img src="imagens/imagem3.jpg" alt="Foto 3">
+  </div>
+  <button class="prev" onclick="prevSlide()">&#10094;</button>
+  <button class="next" onclick="nextSlide()">&#10095;</button>
+  <div class="indicators">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+  </div>
+</div>
     </main>
 
 
 </body>
 <script src="scripts/navbar.js"></script>
+<script src="scripts/homee.js"></script>
 </html>

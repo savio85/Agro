@@ -1,20 +1,25 @@
-:root{
+:root {
     --primary-color: #4B8B3B;
     --secundary-color: #7DBF6C;
     --text-color: #ecf0f1;
     --text-secundary-color: #000f1f;
     --background-color: #2E3D27;
-    }
+}
 
-body{
+body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--text-color);
+    background-color: var(--text-color); /* Fundo padrão (branco claro) */
     transition: background-color 0.5s ease;
 }
 
-.menu-lateral{
+/* Novo: Fundo do body cobre toda a tela quando ativo */
+body.ativo {
+    background-color: var(--text-secundary-color); /* Fundo escuro cobre toda a tela */
+}
+
+.menu-lateral {
     position: fixed;
     left: -300px;
     top: 0;
@@ -26,24 +31,21 @@ body{
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.menu-lateral.ativo{
+.menu-lateral.ativo {
     left: 0;
-    
 }
 
-.menu-lateral ul{
+.menu-lateral ul {
     list-style-type: none;
     padding: 0;
     margin-top: 60px;
-
 }
 
-.menu-lateral ul li{
+.menu-lateral ul li {
     padding: 15px 30px;
-    
 }
 
-.menu-lateral ul li a{
+.menu-lateral ul li a {
     text-decoration: none;
     color: var(--text-color);
     font-size: 18px;
@@ -52,23 +54,24 @@ body{
     gap: 10px;
 }
 
-.menu-lateral ul li a i{
+.menu-lateral ul li a i {
     font-size: 24px;
 }
-.menu-lateral ul li:hover{
+
+.menu-lateral ul li:hover {
     background-color: var(--secundary-color);
 }
 
-.menu-lateral ul li a i:hover{
+.menu-lateral ul li a i:hover {
     transform: translateX(5px) rotate(5deg);
 }
 
-.botao-menu{
+.botao-menu {
     background-color: var(--primary-color);
     position: fixed;
     left: 20px;
     top: 20px;
-    z-index: 6;
+    z-index: 10;
     border-radius: 5px;
     font-size: 24px;
     border: none;
@@ -78,29 +81,29 @@ body{
     transition: all 0.5s ease;
 }
 
-.botao-menu:hover{
+.botao-menu:hover {
     background-color: var(--secundary-color);
 }
 
-.botao-menu.ativo{
+.botao-menu.ativo {
     left: 320px;
 }
 
-.conteudo{
+.conteudo {
     margin-left: 80px;
     padding: 40px;
     color: #233A1D;
-    background-color: var(--text-color);
+    background-color: var(--text-color); /* Fundo branco padrão */
     transition: all 0.5s ease;
 }
 
-.conteudo.ativo{
+.conteudo.ativo {
     margin-left: 380px;
-    background-color: #34495e;
-    color: var(--text-color);
+    background-color: var(--text-secundary-color); /* Fundo escuro quando ativo, para combinar com o body */
+    color: var(--text-color); /* Texto branco */
 }
 
-.background{
+.background {
     position: fixed;
     top: 0;
     left: 0;
@@ -112,11 +115,7 @@ body{
     z-index: 4;
 }
 
-.background.ativo{
+.background.ativo {
     opacity: 1;
     visibility: visible;
-}
-
-.home{
-    
 }
