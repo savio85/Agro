@@ -75,14 +75,15 @@ function displayAppointments(page = 1) {
     }
     
     pageAppointments.forEach((appt, index) => {
-        const globalIndex = start + index; // Índice global para sendWhatsApp (usando validAppointments)
+        const globalIndex = start + index; // Índice global para sendWhatsApp e sendReminder (usando validAppointments)
         const apptDiv = document.createElement('div');
         apptDiv.className = 'appointment-item';
         apptDiv.innerHTML = `
                     <h3>${appt.clienteNome}</h3>
                     <p><strong>Data/Hora:</strong> ${new Date(appt.datahora).toLocaleString('pt-BR')}</p>
                     <p><strong>Telefone:</strong> ${appt.telefone}</p>
-                    <button onclick="sendWhatsApp(${globalIndex})">Enviar Confirmação por WhatsApp</button>
+                    <button onclick="sendWhatsApp(${globalIndex})">WhatsApp</button>
+                    <button onclick="sendReminder(${globalIndex})">Relembrar</button>
                 `;
         appointmentsDiv.appendChild(apptDiv);
     });
@@ -224,6 +225,36 @@ A Agrotech confirma a sua visita para o dia ${dataHoraFormatada}.
 
 Ficamos à disposição para qualquer dúvida.
 Aguardamos você! `;
+    const numero = appt.telefone.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (numero.length < 10) {
+        alert('Erro: Número de telefone inválido.');
+        return;
+    }
+    const url = `https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
+}
+
+// Função para enviar lembrete por WhatsApp
+function sendReminder(index) {
+    const appointments = loadAppointments();
+    const clients = loadClients();
+    
+    // Filtrar válidos novamente para garantir consistência
+    const validAppointments = appointments.filter(appt => {
+        const apptTelefoneNormalized = appt.telefone.replace(/\D/g, '');
+        return clients.some(client => {
+            const clientTelefoneNormalized = client.telefone.replace(/\D/g, '');
+            return client.nome === appt.clienteNome && clientTelefoneNormalized === apptTelefoneNormalized;
+        });
+    });
+    
+    if (!validAppointments[index]) {
+        alert('Erro: Agendamento não encontrado.');
+        return;
+    }
+    const appt = validAppointments[index];
+    const dataHoraFormatada = new Date(appt.datahora).toLocaleString('pt-BR');
+    const mensagem = `Olá Senhor(a) ${appt.clienteNome}, gostariamos de lembra-lo de sua visita agendada para ${dataHoraFormatada}.`;
     const numero = appt.telefone.replace(/\D/g, ''); // Remove caracteres não numéricos
     if (numero.length < 10) {
         alert('Erro: Número de telefone inválido.');

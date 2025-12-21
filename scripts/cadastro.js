@@ -55,17 +55,14 @@ document.getElementById('cadastroForm').addEventListener('submit', function(even
         hasError = true;
     }
 
-    // Nova validação: Verificar duplicatas (usando telefone limpo para comparação)
+    // Nova validação: Verificar duplicatas (OR logic: impede se nome OU email OU telefone já existir)
     if (!hasError) {
         const clients = loadClients();
-        const duplicataNomeEmail = clients.some(cliente => 
-            cliente.nome.toLowerCase() === nome.toLowerCase() && cliente.email.toLowerCase() === email.toLowerCase()
-        );
-        const duplicataTelefone = clients.some(cliente => 
-            cliente.telefone.replace(/\D/g, '') === telefoneLimpo  // Compara sem formatação
-        );
+        const duplicataNome = clients.some(cliente => cliente.nome.toLowerCase() === nome.toLowerCase());
+        const duplicataEmail = clients.some(cliente => cliente.email.toLowerCase() === email.toLowerCase());
+        const duplicataTelefone = clients.some(cliente => cliente.telefone.replace(/\D/g, '') === telefoneLimpo);
 
-        if (duplicataNomeEmail || duplicataTelefone) {
+        if (duplicataNome || duplicataEmail || duplicataTelefone) {
             document.getElementById('duplicataError').style.display = 'block';
             hasError = true;  // Impede o salvamento
         }
