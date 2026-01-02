@@ -119,3 +119,187 @@ body.ativo {
     opacity: 1;
     visibility: visible;
 }
+
+/* Estilos para o footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 5px 0; /* Reduzido de 10px para 5px para deixar menor */
+    font-size: 12px; /* Reduzido de 14px para 12px para deixar menor */
+    z-index: 3; /* Abaixo do menu lateral e botão, mas acima do background quando ativo */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Transições suaves para mudanças de tema */
+}
+
+footer a {
+    color: var(--secundary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para Responsividade */
+
+/* Celulares pequenos (< 480px) */
+@media (max-width: 480px) {
+    .menu-lateral {
+        width: 100%; /* Menu ocupa toda a largura da tela */
+        left: -100%; /* Escondido completamente */
+    }
+    
+    .menu-lateral.ativo {
+        left: 0; /* Aparece cobrindo a tela inteira */
+    }
+    
+    .menu-lateral ul li {
+        padding: 20px 20px; /* Mais espaço para toque */
+    }
+    
+    .menu-lateral ul li a {
+        font-size: 16px; /* Texto menor */
+    }
+    
+    .menu-lateral ul li a i {
+        font-size: 20px; /* Ícones menores */
+    }
+    
+    .botao-menu {
+        left: 10px; /* Mais próximo da borda */
+        top: 10px;
+        padding: 8px 12px; /* Menor */
+        font-size: 20px; /* Ícone menor */
+    }
+    
+    .botao-menu.ativo {
+        left: 10px; /* Não move tanto, pois menu cobre tela */
+    }
+    
+    .conteudo {
+        margin-left: 0; /* Remove margem lateral */
+        padding: 20px 15px; /* Padding menor */
+        font-size: 14px; /* Texto menor */
+    }
+    
+    .conteudo.ativo {
+        margin-left: 0; /* Mesmo sem margem */
+    }
+    
+    footer {
+        font-size: 10px; /* Ainda menor */
+        padding: 3px 0; /* Compacto */
+    }
+}
+
+/* Celulares e tablets (< 768px) */
+@media (max-width: 768px) {
+    .menu-lateral {
+        width: 250px; /* Largura reduzida */
+    }
+    
+    .menu-lateral.ativo {
+        left: 0;
+    }
+    
+    .botao-menu.ativo {
+        left: 270px; /* Ajuste para largura do menu */
+    }
+    
+    .conteudo {
+        margin-left: 0; /* Sem margem lateral em telas pequenas */
+        padding: 30px 20px;
+    }
+    
+    .conteudo.ativo {
+        margin-left: 250px; /* Ajusta para menu menor */
+    }
+    
+    /* Ajustes para carousel (se aplicável, ex.: em home.css) */
+    .carousel img {
+        width: 100%; /* Imagens se ajustam */
+        height: auto;
+    }
+    
+    /* Ajustes para formulários (ex.: em agendamento) */
+    form label, form input, form button {
+        width: 100%; /* Campos ocupam largura total */
+        margin-bottom: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+}
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .conteudo {
+        margin-left: 60px; /* Margem menor */
+        padding: 35px;
+    }
+    
+    .conteudo.ativo {
+        margin-left: 320px; /* Ajuste para menu */
+    }
+    
+    .menu-lateral ul li a {
+        font-size: 16px;
+    }
+    
+    .menu-lateral ul li a i {
+        font-size: 22px;
+    }
+}
+
+/* Desktops grandes (> 1024px) - Mantém original, mas pode adicionar ajustes se necessário */
+@media (min-width: 1024px) {
+    /* Nenhum ajuste extra, layout original é bom */
+}
+
+.conteudo {
+    margin-left: 80px;
+    padding: 40px; /* Mantém o padding lateral */
+    padding-top: 80px; /* Adicionado: Espaço no topo para o botão menu (20px + margem extra) */
+    color: #233A1D;
+    background-color: var(--text-color);
+    transition: all 0.5s ease;
+}
+
+.conteudo.ativo {
+    margin-left: 380px;
+    background-color: var(--text-secundary-color);
+    color: var(--text-color);
+    padding-top: 80px; /* Mantém o espaço mesmo quando ativo */
+}
+
+/* ... (media queries existentes) ... */
+
+/* Reforços para responsividade */
+@media (max-width: 768px) {
+    .conteudo {
+        margin-left: 0;
+        padding: 30px 20px;
+        padding-top: 60px; /* Espaço reduzido para mobile (botão em top: 10px + margem) */
+    }
+    
+    .conteudo.ativo {
+        margin-left: 250px; /* Ajuste para menu menor */
+        padding-top: 60px; /* Mantém espaço */
+    }
+}
+
+@media (max-width: 480px) {
+    .conteudo {
+        padding: 20px 15px;
+        padding-top: 50px; /* Ainda menor para telas muito pequenas */
+    }
+    
+    .conteudo.ativo {
+        padding-top: 50px;
+    }
+}

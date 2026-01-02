@@ -42,18 +42,20 @@ function loadClientsForAgenda() {
 let currentPage = 1;
 const itemsPerPage = 5;
 
-// Exibir agendamentos com paginação (filtrando apenas válidos)
+// Exibir agendamentos com paginação (filtrando apenas válidos e futuros)
 function displayAppointments(page = 1) {
     const appointments = loadAppointments();
     const clients = loadClients();
+    const now = new Date(); // Data/hora atual para filtrar agendamentos passados
     
-    // Filtrar apenas agendamentos cujos clientes ainda existem (comparando nome e telefone normalizados)
+    // Filtrar apenas agendamentos cujos clientes ainda existem e que são no futuro
     const validAppointments = appointments.filter(appt => {
         const apptTelefoneNormalized = appt.telefone.replace(/\D/g, ''); // Normalizar telefone do agendamento
+        const apptDateTime = new Date(appt.datahora); // Converter data do agendamento
         return clients.some(client => {
             const clientTelefoneNormalized = client.telefone.replace(/\D/g, ''); // Normalizar telefone do cliente
             return client.nome === appt.clienteNome && clientTelefoneNormalized === apptTelefoneNormalized;
-        });
+        }) && apptDateTime > now; // Adicionado: Apenas agendamentos no futuro
     });
     
     const totalPages = Math.ceil(validAppointments.length / itemsPerPage);
@@ -191,7 +193,7 @@ function cleanOrphanedAppointments() {
         const apptTelefoneNormalized = appt.telefone.replace(/\D/g, '');
         return clients.some(client => {
             const clientTelefoneNormalized = client.telefone.replace(/\D/g, '');
-            return client.nome === appt.clienteNome && clientTelefoneNormalized === apptTelefoneNormalized;
+            return client.nome === appt.clienteNome && clientTelefoneNormalized === clientTelefoneNormalized;
         });
     });
     
@@ -268,4 +270,9 @@ function sendReminder(index) {
 window.onload = function () {
     loadClientsForAgenda();
     displayAppointments(currentPage);
+    
+    // Atualizar agendamentos a cada minuto para ocultar passados automaticamente
+    setInterval(() => {
+        displayAppointments(currentPage);
+    }, 60000); // 60000 ms = 1 minuto
 };
