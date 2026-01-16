@@ -13,7 +13,10 @@
 </head>
 
 <body>
-    <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+    <header class="top-header">
+        <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+        <h1 class="nome-empresa">AgroTech</h1>
+    </header>
 
     <nav class="menu-lateral">
         <ul>
@@ -41,27 +44,47 @@
                     Agendar 
                 </a>
             </li>
-            
         </ul>
     </nav>
 
     <div class="background"></div>
     <main class="conteudo">
-        <h1>Conteudo Principal</h1>
+        <!-- Carrossel de imagens -->
         <div class="carousel">
-  <div class="carousel-inner">
-    <img src="imagens/imagem1.jpg" alt="Foto 1" class="active">
-    <img src="imagens/imagem2.jpg" alt="Foto 2">
-    <img src="imagens/imagem3.jpg" alt="Foto 3">
-  </div>
-  <button class="prev" onclick="prevSlide()">&#10094;</button>
-  <button class="next" onclick="nextSlide()">&#10095;</button>
-  <div class="indicators">
-    <span class="dot active" onclick="goToSlide(0)"></span>
-    <span class="dot" onclick="goToSlide(1)"></span>
-    <span class="dot" onclick="goToSlide(2)"></span>
-  </div>
-</div>
+            <div class="carousel-inner">
+                <img src="imagens/imagem1.jpg" alt="Foto 1" class="active">
+                <img src="imagens/imagem2.jpg" alt="Foto 2">
+                <img src="imagens/imagem3.jpg" alt="Foto 3">
+                <img src="imagens/imagem4.jpg" alt="Foto 4">
+            </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+            <div class="indicators">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+                <span class="dot" onclick="goToSlide(3)"></span>
+            </div>
+        </div>
+
+        <!-- Seção Sobre Nós com o texto -->
+        <section class="sobre-nos">
+            <h2>Sobre Nós</h2>
+            <p>Visite Nossa Empresa e Conheça de Perto Nossas Soluções para o Agronegócio</p>
+            <p>Nossa empresa nasceu com o propósito de levar inovação, qualidade e confiança ao agronegócio. Atuamos no desenvolvimento e na comercialização de produtos e máquinas pensados para aumentar a produtividade e eficiência no campo, sempre acompanhando as necessidades reais dos produtores rurais.</p>
+            <p>Recebemos nossos clientes para visitas presenciais, onde é possível conhecer de perto nossas instalações, nossos produtos e equipamentos, além de entender como cada solução pode contribuir para o seu negócio. Durante a visita, apresentamos nossos processos, tiramos dúvidas e mostramos, na prática, como trabalhamos para entregar resultados.</p>
+            <p>Acreditamos que a transparência e o relacionamento próximo são fundamentais. Por isso, abrimos nossas portas para que você possa vivenciar nossa empresa, conhecer nossa equipe e ter a segurança de estar escolhendo um parceiro comprometido com o crescimento do agronegócio.</p>
+            <p>Agende uma visita e venha conhecer de perto tudo o que preparamos para ajudar você a produzir mais e melhor.</p>
+        </section>
+
+        <!-- Espaço para contato da empresa -->
+        <section class="contato">
+            <h2>Contato</h2>
+            <p><strong>Endereço:</strong> [Insira o endereço aqui]</p>
+            <p><strong>Telefone:</strong> [Insira o telefone aqui]</p>
+            <p><strong>Email:</strong> [Insira o email aqui]</p>
+            <p><strong>Horário de Funcionamento:</strong> [Insira o horário aqui]</p>
+        </section>
     </main>
 
     <footer>
